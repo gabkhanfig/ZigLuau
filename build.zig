@@ -3,14 +3,6 @@ const std = @import("std");
 const Build = std.Build;
 const Step = std.Build.Step;
 
-pub const Language = enum {
-    lua51,
-    lua52,
-    lua53,
-    lua54,
-    luau,
-};
-
 pub fn build(b: *Build) void {
     // Remove the default install and uninstall steps
     b.top_level_steps = .{};
@@ -40,7 +32,6 @@ pub fn build(b: *Build) void {
         .optimize = optimize,
     });
     tests.root_module.addImport("zigluau", zigluau);
-    //tests.linkLibrary(zigluau);
 
     const run_tests = b.addRunArtifact(tests);
     const test_step = b.step("test", "Run zigluau tests");
